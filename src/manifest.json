@@ -1,0 +1,25 @@
+{
+	"manifest_version": 2,
+	"name": "LocalJSLibraryCache",
+	"version": "0.1.0",
+	"description": "将一些常用的js库、css库、字体库等缓存到本地。",
+	"page_action": {
+		"default_icon": {
+      "19":"images/icon19.png",
+      "38":"images/icon38.png"
+		}
+	},
+	"permissions": [
+		"webRequest",
+		"webRequestBlocking",
+		"*://*/*"
+	],
+	"background": {
+		"scripts": [
+			"background.js"
+		]
+	},
+	"author": "PengEJ",
+	"homepage_url": "https://github.com/pengej/LocalJSLibraryCache",
+	"update_url": "https://github.com/pengej/LocalJSLibraryCache/raw/master/update/updates.xml"
+}
