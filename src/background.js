@@ -19,6 +19,9 @@ key是正则表达式
 var redirectMap = {
     ".*3.3.1.*bootstrap.min.css":"//ajax.aspnetcdn.com/ajax/bootstrap/3.3.1/css/bootstrap.min.css"
   , "bootstrap.min.css":"//ajax.aspnetcdn.com/ajax/bootstrap/3.3.1/css/bootstrap.min.css"
+  , "jquery-2.1.1.js":"//ajax.aspnetcdn.com/ajax/jQuery/jquery-2.1.1.js"
+  , "jquery-2.1.1.min.js":"http://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.1.1.min.js"
+  , "jquery-2.1.1.min.map":"http://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.1.1.min.map"
   , "googleapis.com":"lug.ustc.edu.cn"
   , "themes.googleusercontent.com":"google-themes.lug.ustc.edu.cn"
   , "fonts.gstatic.com":"fonts-gstatic.lug.ustc.edu.cn"
@@ -60,7 +63,7 @@ function showIcon() {
     chrome.pageAction.show(tabs[0].id);
     chrome.pageAction.setTitle({
       tabId:tabs[0].id,
-      title:"本页有资源地址被替换或被阻止"}
+      title:"本页有资源地址被替换"+countRedirected+"处，被阻止"+countCanceled+"处"}
     );
 
   });
