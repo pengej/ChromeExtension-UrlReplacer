@@ -15,19 +15,158 @@ var whiteList = [
 key是正则表达式
 
 , "www.google-analytics.com":"[cancel]"
+, "\\.360\\.com":"[cancel]"
 */
 var redirectMap = {
     ".*3.3.1.*bootstrap.min.css":"//ajax.aspnetcdn.com/ajax/bootstrap/3.3.1/css/bootstrap.min.css"
   , "bootstrap.min.css":"//ajax.aspnetcdn.com/ajax/bootstrap/3.3.1/css/bootstrap.min.css"
   , "jquery-2.1.1.js":"//ajax.aspnetcdn.com/ajax/jQuery/jquery-2.1.1.js"
-  , "jquery-2.1.1.min.js":"http://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.1.1.min.js"
-  , "jquery-2.1.1.min.map":"http://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.1.1.min.map"
+  , "jquery-2.1.1.min.js":"//ajax.aspnetcdn.com/ajax/jQuery/jquery-2.1.1.min.js"
+  , "jquery-2.1.1.min.map":"//ajax.aspnetcdn.com/ajax/jQuery/jquery-2.1.1.min.map"
   , "googleapis.com":"lug.ustc.edu.cn"
   , "themes.googleusercontent.com":"google-themes.lug.ustc.edu.cn"
   , "fonts.gstatic.com":"fonts-gstatic.lug.ustc.edu.cn"
   
 }
+/*
 
+1.2.1	jquery-migrate		//ajax.aspnetcdn.com/ajax/jquery.migrate/jquery-migrate-1.2.0.js
+		jqyery-migrate min	//ajax.aspnetcdn.com/ajax/jquery.migrate/jquery-migrate-1.2.0.min.js
+1.2.0
+1.1.1
+1.1.0
+1.0.0
+
+1.11.2	jquery-ui		//ajax.aspnetcdn.com/ajax/jquery.ui/1.11.2/jquery-ui.js
+		jquery-ui min	//ajax.aspnetcdn.com/ajax/jquery.ui/1.11.2/jquery-ui.min.js
+1.11.1
+1.11.0
+1.10.4
+1.10.3
+1.10.2
+1.10.1
+1.10.0
+1.9.2
+1.9.1
+1.9.0
+1.8.24
+1.8.23
+1.8.22
+1.8.21
+1.8.20
+1.8.19
+1.8.18
+1.8.17
+1.8.16
+1.8.15
+1.8.14
+1.8.13
+1.8.12
+1.8.11
+1.8.10
+1.8.9
+1.8.8
+1.8.7
+1.8.6
+1.8.5
+
+1.13.1	jquery.validate	//ajax.aspnetcdn.com/ajax/jquery.validate/1.13.0/jquery.validate.js
+						//ajax.aspnetcdn.com/ajax/jquery.validate/1.13.0/jquery.validate.min.js
+						//ajax.aspnetcdn.com/ajax/jquery.validate/1.13.0/additional-methods.js
+						//ajax.aspnetcdn.com/ajax/jquery.validate/1.13.0/additional-methods.min.js
+						//ajax.aspnetcdn.com/ajax/jquery.validate/1.13.0/localization/messages_##.js
+1.13.0
+1.12.0
+1.11.1
+1.11.0
+1.10.0
+1.9
+1.8.1
+1.8
+1.7
+1.6
+1.5.5
+
+
+########################################################################
+#######################   jQuery Mobile   ##############################
+########################################################################
+
+
+						
+2.1.1	jquery	//ajax.aspnetcdn.com/ajax/jQuery/jquery-2.1.1.js
+				//ajax.aspnetcdn.com/ajax/jQuery/jquery-2.1.1.min.js
+				//ajax.aspnetcdn.com/ajax/jQuery/jquery-2.1.1.min.map
+2.1.0
+2.0.3
+2.0.2
+2.0.1
+2.0.0
+1.11.1
+1.11.0
+1.10.2
+1.10.1
+1.9.1
+1.9.0
+1.8.3
+1.8.2
+1.8.1
+1.8.0
+1.7.2
+1.7.1
+1.7
+1.6.4
+1.6.3
+1.6.2
+1.6.1
+1.6
+1.5.2
+1.5.1
+1.5
+1.4.4
+1.4.3
+1.4.2
+1.4.1
+1.4
+1.3.2
+
+
+
+
+3.3.1		bootstrap	//ajax.aspnetcdn.com/ajax/bootstrap/3.3.1/bootstrap.js
+						//ajax.aspnetcdn.com/ajax/bootstrap/3.3.1/bootstrap.min.js
+						//ajax.aspnetcdn.com/ajax/bootstrap/3.3.1/css/bootstrap.css
+						//ajax.aspnetcdn.com/ajax/bootstrap/3.3.1/css/bootstrap.css.map
+						//ajax.aspnetcdn.com/ajax/bootstrap/3.3.1/css/bootstrap.min.css
+						//ajax.aspnetcdn.com/ajax/bootstrap/3.3.1/css/bootstrap-theme.css
+						//ajax.aspnetcdn.com/ajax/bootstrap/3.3.1/css/bootstrap-theme.css.map
+						//ajax.aspnetcdn.com/ajax/bootstrap/3.3.1/css/bootstrap-theme.min.css
+						//ajax.aspnetcdn.com/ajax/bootstrap/3.3.1/fonts/glyphicons-halflings-regular.eot
+						//ajax.aspnetcdn.com/ajax/bootstrap/3.3.1/fonts/glyphicons-halflings-regular.svg
+						//ajax.aspnetcdn.com/ajax/bootstrap/3.3.1/fonts/glyphicons-halflings-regular.ttf
+						//ajax.aspnetcdn.com/ajax/bootstrap/3.3.1/fonts/glyphicons-halflings-regular.woff
+3.3.0
+3.2.0
+3.1.1
+3.1.0
+3.0.3
+3.0.2
+3.0.1
+3.0.0
+
+2.3.2	bootstrap	//ajax.aspnetcdn.com/ajax/bootstrap/2.3.2/bootstrap.js
+					//ajax.aspnetcdn.com/ajax/bootstrap/2.3.2/bootstrap.min.js
+					//ajax.aspnetcdn.com/ajax/bootstrap/2.3.2/css/bootstrap.css
+					//ajax.aspnetcdn.com/ajax/bootstrap/2.3.2/css/bootstrap.min.css
+					//ajax.aspnetcdn.com/ajax/bootstrap/2.3.2/css/bootstrap-responsive.css
+					//ajax.aspnetcdn.com/ajax/bootstrap/2.3.2/css/bootstrap-responsive.min.css
+					//ajax.aspnetcdn.com/ajax/bootstrap/2.3.2/img/glyphicons-halflings.png
+					//ajax.aspnetcdn.com/ajax/bootstrap/2.3.2/img/glyphicons-halflings-white.png
+2.3.1
+
+
+
+*/
 var countCanceled = 0;
 var countRedirected = 0;
 
