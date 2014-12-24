@@ -10,6 +10,7 @@
 		}
 	},
 	"permissions": [
+		"storage",
 		"webRequest",
 		"webRequestBlocking",
 		"*://*/*"
@@ -19,6 +20,7 @@
 			"background.js"
 		]
 	},
+	"options_page": "options.html",
 	"author": "PengEJ",
 	"homepage_url": "https://github.com/pengej/ChromeExtension-UrlReplacer",
 	"update_url": "https://github.com/pengej/ChromeExtension-UrlReplacer/raw/master/update/updates.xml"
