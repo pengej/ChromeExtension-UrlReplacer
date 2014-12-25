@@ -1,19 +1,29 @@
 <!DOCTYPE html>
 <html>
-<head><title>UrlReplacer Options</title></head>
+<head><title>UrlReplacer 选项</title>
+<link href="options.css" rel="stylesheet" type="text/css">
+</head>
 <body>
+<header class="m-hd m-hd-bg">
+    <h2 class="u-tt"><img src="/images/icon38.png" height="30" valign="middle"/> UrlReplacer 选项</h2>
+    <ul>
+        <li class="z-crt"><a href="#">选项</a></li>
+        <li><a href="#">帮助</a></li>
+    </ul>
+</header>
+<div id="content-options" class="content">
+	<h2 class="u-tt u-tt-lg">白名单:</h2>
+	<textarea name="whiteList" id="whiteList" class="config-area" cols="80" rows="10"></textarea><br/>
+	（json）白名单中的url不执行下面的任何动作。
+	<br/>
+	<h2 class="u-tt u-tt-lg">映射表:</h2>
+	<textarea name="redirectMap" id="redirectMap" class="config-area"  cols="80" rows="10"></textarea><br/>
+	（json）<br/>
+	<br/>
 
-White List:<br/>
-<textarea name="whiteList" id="whiteList" cols="80" rows="5"></textarea><br/>
-<br/>
-Redirect Map:<br/>
-<textarea name="redirectMap" id="redirectMap" cols="80" rows="5"></textarea><br/>
-
-
-<div id="status"></div>
-
-<button id="save">Save</button>
-
+	<br/>
+	<button id="save" class="u-btn u-btn-lg u-btn-c3">保存</button> <span id="status"></span>
+</div>
 <script src="options.js"></script>
 </body>
 </html>

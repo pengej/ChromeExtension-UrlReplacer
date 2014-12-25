@@ -8,9 +8,11 @@ function save_options() {
   }, function() {
     // Update status to let user know options were saved.
     var status = document.getElementById('status');
-    status.textContent = 'Options saved.';
+    status.textContent = '配置保存成功';
+    status.className="";
     setTimeout(function() {
-      status.textContent = '';
+      status.className="a-fadeout";
+      //status.textContent = '';
     }, 750);
   });
 }
@@ -20,8 +22,13 @@ function save_options() {
 function restore_options() {
   // Use default value color = 'red' and likesColor = true.
   chrome.storage.sync.get({
-    whiteList: "",
-    redirectMap: ""
+    whiteList: "[]",
+    redirectMap: "{\n"+
+     "   \"ajax\\\\.googleapis\\\\.com\":\"ajax.lug.ustc.edu.cn\"\n"+
+     " , \"fonts\\\\.googleapis\\\\.com\":\"fonts.lug.ustc.edu.cn\"\n"+
+     " , \"themes\\\\.googleusercontent\\\\.com\":\"google-themes.lug.ustc.edu.cn\"\n"+
+     " , \"fonts\\\\.gstatic\\\\.com\":\"fonts-gstatic.lug.ustc.edu.cn\"\n"+
+    "}"
   }, function(items) {
     document.getElementById('whiteList').value = items.whiteList;
     document.getElementById('redirectMap').value = items.redirectMap;
