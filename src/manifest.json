@@ -27,6 +27,5 @@
 	},
 	"options_page": "options.html",
 	"author": "PengEJ",
-	"homepage_url": "https://github.com/pengej/ChromeExtension-UrlReplacer",
-	"update_url": "https://github.com/pengej/ChromeExtension-UrlReplacer/raw/master/update/updates.xml"
+	"homepage_url": "https://github.com/pengej/ChromeExtension-UrlReplacer"
 }
