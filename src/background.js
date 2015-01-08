@@ -14,9 +14,7 @@ key是正则表达式
 , "\\.360\\.com":"[cancel]"
 */
 var redirectMap = {};
-
-var countCanceled = 0;
-var countRedirected = 0;
+var mapCount = new Map();
 
 function getRedirectUrl(key, url) {
   var rtn = redirectMap[key];
@@ -45,15 +43,17 @@ function isInWhiteList(url) {
   return rtn;
 }
 
-function showIcon() {
-  chrome.tabs.query({'active': true}, function(tabs) {
-    chrome.pageAction.show(tabs[0].id);
-    chrome.pageAction.setTitle({
-      tabId:tabs[0].id,
-      title:"本页有资源地址被替换"+countRedirected+"处，被阻止"+countCanceled+"处"}
-    );
-
-  });
+function showIcon(id, count) {
+  if(count!=undefined) {
+    str = "本页有资源地址被替换"+count.redirected+"处，被阻止"+count.canceled+"处";
+  }else{
+    str = "本页有资源地址被替换或被阻止";
+  }
+  chrome.pageAction.show(id);
+  chrome.pageAction.setTitle({
+    'tabId':id,
+    'title':str}
+  );
 }
 
 
@@ -91,26 +91,43 @@ chrome.webRequest.onBeforeRequest.addListener(
   function(info) {
     if(isInWhiteList(info.url))
       return;
-    for(var key in redirectMap) {
-      var reg = new RegExp(key);
-      if(info.url.match(reg)) {
-        var newUrl = getRedirectUrl(key, info.url);
-        
-        if("[cancel]"==newUrl) {
-          console.log("阻止加载 "+info.url);
 
-          countCanceled++;
-          showIcon();
-          return {cancel: true};
-        } else {
-          console.log("重定向 "+info.url+" 到 "+newUrl);
 
-          countRedirected++;
-          showIcon();
-          return {redirectUrl: newUrl};
+
+    chrome.tabs.query({'active': true, 'currentWindow':true}, function(tabs) {
+
+      var count = mapCount.get("id"+tabs[0].id);
+      if(count==undefined) {
+        count = {
+          redirected : 0,
+          canceled : 0
+        };
+        mapCount.set("id"+tabs[0].id, count);
+      }
+
+      for(var key in redirectMap) {
+        var reg = new RegExp(key);
+        if(info.url.match(reg)) {
+          var newUrl = getRedirectUrl(key, info.url);
+          
+          if("[cancel]"==newUrl) {
+            console.log("阻止加载 "+info.url);
+            count.canceled++;
+            showIcon(tabs[0].id, count);
+            return {cancel: true};
+          } else {
+            console.log("重定向 "+info.url+" 到 "+newUrl);
+            count.redirected++;
+            showIcon(tabs[0].id, count);
+            return {redirectUrl: newUrl};
+          }
         }
       }
-    }
+
+
+    });
+
+
   },
   // filters
   {
@@ -121,3 +138,28 @@ chrome.webRequest.onBeforeRequest.addListener(
   },
   // extraInfoSpec
   ["blocking"]);
+
+chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab){
+  if(changeInfo.status=='loading') {
+    var count = mapCount.get("id"+tabId);
+    if(count==undefined) {
+      count = {
+        redirected : 0,
+        canceled : 0
+      };
+      mapCount.set("id"+tabId, count);
+    }else{
+      count.redirected=0;
+      count.canceled=0;
+    }
+
+    chrome.pageAction.hide(id);
+  }  
+});
+
+chrome.tabs.onRemoved.addListener(function(tabId, removeInfo){
+  var count = mapCount.get("id"+tabId);
+  if(count!=undefined) {
+    mapCount.delete("id"+tabId);
+  }
+});
