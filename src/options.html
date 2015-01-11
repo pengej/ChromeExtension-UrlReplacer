@@ -14,14 +14,35 @@
 <div id="content-options" class="content">
 	<h2 class="u-tt u-tt-lg">白名单:</h2>
 	<textarea name="whiteList" id="whiteList" class="config-area" cols="80" rows="10"></textarea><br/>
-	（json）白名单中的url不执行下面的任何动作。
+	（json）白名单中的url不执行下面的任何动作。<br/>
+	<pre>白名单设置json是一个数组，数据元素为匹配url的正则表达式。例如：
+["baidu\\.com", ".*\\.abc\\.com"]</pre>
 	<br/><br/>
 	<h2 class="u-tt u-tt-lg">映射表:</h2>
 	<textarea name="redirectMap" id="redirectMap" class="config-area"  cols="80" rows="10"></textarea><br/>
 	（json）<br/>
-	<br/>
-
-	<br/>
+	<pre>该配置是map，key为匹配url的正则表达式，value目前有两种：
+第一种为字符串，表示要将匹配到的url替换成指定的url，或者取值[cancel]表示阻止匹配到的url加载
+第二种为map，其中key为headers字段为数组，存储着为匹配到的url设置或添加指定的HTTP请求头。
+    headers中存储的对象为map，name表示要设置或修改的请求头名称，value表示要设置或修改的请求头内容
+以上几种设置请查看下列例子：
+{
+    "ajax\\.googleapis\\.com": "ajax.lug.ustc.edu.cn",
+    "\\.google-analytics\\.com": "[cancel]",
+    "pan\\.baidu\\.com/s/": {
+        "headers": [
+            {
+                "name": "User-Agent",
+                "value": "Mozilla/5.0 (iPhone; U; CPU iPhone OS 4_2_1 like Mac OS X; en-us) AppleWebKit/533.17.9 (KHTML, like Gecko) Version/5.0.2 Mobile/8C148 Safari/6533.18.5"
+            }
+        ]
+    }
+}
+以上例子表示将ajax.googleapis.com替换成ajax.lug.ustc.edu.cn（将google资源映射到国内）
+阻止.google-analytics.com地址访问（提高网站加载速度）
+为pan.baidu.com/s/地址修改用户代理字符串，自动转为wap版
+</pre>
+	<br/><br/>
 	<button id="save" class="u-btn u-btn-lg u-btn-c3">保存</button> <span id="status"></span>
 </div>
 <script src="options.js"></script>
